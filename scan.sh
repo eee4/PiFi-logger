@@ -28,8 +28,17 @@ echo "Starting scan for networks:" > "$path" #output to file, that the script st
 for (( ; ; )) #starting infinite loop
  do
 
-        time=$((delay*scans)) #calculating time
-        printf "\n\nScan $scans \n\n - $time seconds from start\n" >> "$path" #printing info to file as a header - I am using here printf, since it allowes me to easily make a new line
+        if [ $delay == 0 ] #simple if to make sure time is calculated properly
+            then 
+
+                time=$scans #time set simply to scans, because why multiply by one? :)
+
+            else 
+
+                time=$((delay*scans)) #calculating time when $delay is positive
+
+        fi #end of statement
+        printf "\n\nScan $scans - $time seconds from start\n\n" >> "$path" #printing info to file as a header - I am using here printf, since it allowes me to easily make a new line
                 sudo iw dev wlan0 scan | grep SSID >> "$path" #this is where the magic happens - the command is saved to path specified by user
         sleep "$delay" #delay, also chosen by user
         echo "Scan number $scans successfully done. " #information to console, that scan has been successfully done
