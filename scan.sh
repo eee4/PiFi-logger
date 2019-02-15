@@ -29,7 +29,7 @@ for (( ; ; )) #starting infinite loop
  do
 
         time=$((delay*scans)) #calculating time
-        printf "\n\nScan $scans \n\n - $time seconds from start" >> "$path" #printing info to file as a header - I am using here printf, since it allowes me to easily make a new line
+        printf "\n\nScan $scans \n\n - $time seconds from start\n" >> "$path" #printing info to file as a header - I am using here printf, since it allowes me to easily make a new line
                 sudo iw dev wlan0 scan | grep SSID >> "$path" #this is where the magic happens - the command is saved to path specified by user
         sleep "$delay" #delay, also chosen by user
         echo "Scan number $scans successfully done. " #information to console, that scan has been successfully done
